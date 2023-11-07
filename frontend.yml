@@ -1,33 +1,45 @@
+#Name of the project
 - name:  Expense Frontend Setup
   hosts:  all
+#running the play as a superuser
   become: yes
+#initiating task play
   tasks:
+# Installation of Nginx
     - name: Installing nginx
       ansible.builtin.dnf:
         name: nginx
         state: present
+#copy expense.conf file to /etc
     - name: Copy Expense Config File
       ansible.builtin.copy:
           src: expense.conf
           dest: /etc/nginx/default.d/expense.conf
+#cleanup old directory if exits
     - name: Clean Old Nginx Dir
       ansible.builtin.file:
         path: /usr/share/nginx/html
         state: absent
+#create new ngnix directory
     - name: create Nginx Dir
       ansible.builtin.file:
         path: /usr/share/nginx/html
         state: directory
+#Download and extract content of html file
     - name: Download and Extract the content
       ansible.builtin.unarchive:
         src: https://expense-artifacts.s3.amazonaws.com/frontend.zip
         dest: /usr/share/nginx/html
         remote_src: yes
+#Restart Nginx service
     - name: Start Nginx Service
       ansible.builtin.systemd:
         name: nginx
         state: restarted
         enabled: yes
+
+
+
 
 
 
