@@ -8,7 +8,7 @@
       ansible.builtin.shell: dnf module enable nodejs:18 -y
     - name: nodejs
       ansible.builtin.dnf:
-        - name: nodejs
+          name: nodejs
           state: present
     - name: copy backend service file
       ansible.builtin.copy:
@@ -42,10 +42,10 @@
       ansible.builtin.shell: mysql -h <MYSQL-SERVER-IPADDRESS> -uroot -pmysql -h <MYSQL-SERVER-IPADDRESS> -uroot -p{{MYSQL_ROOT_PASSWORD}} < /app/schema/backend.sql
     - name: start backend service
       ansible.builtin.systemd:
-        -name: backend
-        -state: restarted
-        -enabled: yes
-        -daemon-reload: yes
+         name: backend
+         state: restarted
+         enabled: yes
+         daemon-reload: yes
 
 
 
