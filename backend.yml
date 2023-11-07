@@ -6,7 +6,7 @@
       ansible.builtin.shell: dnf module disable nodejs -y
     - name: Enable nodejs version18
       ansible.builtin.shell: dnf module enable nodejs:18 -y
-    - name: Nodejs
+    - name: nodejs
       ansible.builtin.dnf:
         - name: nodejs
           state: present
